@@ -1,0 +1,274 @@
+
+
+/*
+This is a UI file (.ui.qml) that is intended to be edited in Qt Design Studio only.
+It is supposed to be strictly declarative and only uses a subset of QML. If you edit
+this file manually, you might introduce QML code that is not supported by Qt Design Studio.
+Check out https://doc.qt.io/qtcreator/creator-quick-ui-forms.html for details on .ui.qml files.
+*/
+import QtQuick 6.5
+import QtQuick.Controls 6.5
+import Myst
+
+Rectangle {
+    id: rectangle
+    width: 1080
+    height: 1920
+    
+    color: Constants.backgroundColor
+    
+    Rectangle {
+        id: specialCards
+        width: 200
+        color: "#ee0e0e"
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 0
+        anchors.topMargin: 0
+        anchors.leftMargin: 0
+    }
+    
+    Rectangle {
+        id: score
+        x: 1797
+        width: 200
+        color: "#00160ef4"
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.rightMargin: 0
+        anchors.bottomMargin: 0
+        anchors.topMargin: 0
+        
+        Rectangle {
+            id: oppScore
+            x: 0
+            y: 860
+            width: 200
+            height: 200
+            color: "#ffffff"
+            radius: 40
+            anchors.bottom: parent.verticalCenter
+            anchors.bottomMargin: 50
+            
+            Text {
+                id: text1
+                text: "00"
+                anchors.verticalCenter: parent.verticalCenter
+                font.pixelSize: 100
+                anchors.horizontalCenter: parent.horizontalCenter
+                font.family: "Courier"
+                scale: 1
+            }
+        }
+        
+        Rectangle {
+            id: myScore
+            width: 200
+            height: 200
+            color: "#ffffff"
+            radius: 40
+            anchors.top: parent.verticalCenter
+            anchors.topMargin: 50
+            
+            Text {
+                id: text2
+                text: qsTr("00")
+                anchors.verticalCenter: parent.verticalCenter
+                font.pixelSize: 100
+                font.family: "Courier"
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+        }
+        
+        RoundCircle {
+            id: roundCircle1
+            text: "1"
+            anchors.bottom: roundCircle2.top
+            display: AbstractButton.TextBesideIcon
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottomMargin: 50
+        }
+        
+        RoundCircle {
+            id: roundCircle2
+            text: "2"
+            anchors.bottom: roundCircle3.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottomMargin: 50
+        }
+        
+        RoundCircle {
+            id: roundCircle3
+            y: 1548
+            text: "3"
+            anchors.bottom: parent.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottomMargin: 200
+        }
+    }
+    
+    Rectangle {
+        id: myHand
+        y: 1476
+        height: rectangle.height / 9
+        color: "#00160ef4"
+        anchors.left: specialCards.right
+        anchors.right: score.left
+        anchors.bottom: parent.bottom
+        anchors.rightMargin: 0
+        anchors.leftMargin: 0
+        anchors.bottomMargin: 0
+        
+        Row {
+            id: row
+            width: 200
+            height: 400
+            
+            Repeater {
+                id: repeater
+                anchors.fill: parent
+                
+                Image {
+                    id: image
+                    x: 0
+                    y: 0
+                    width: 100
+                    height: 100
+                    source: "qrc:/qtquickplugin/images/template_image.png"
+                    fillMode: Image.PreserveAspectFit
+                }
+            }
+        }
+    }
+    
+    Rectangle {
+        id: myClubs
+        height: rectangle.height / 9
+        color: "#00160ef4"
+        anchors.left: specialCards.right
+        anchors.right: score.left
+        anchors.bottom: myHand.top
+        anchors.leftMargin: 0
+        anchors.rightMargin: 0
+        anchors.bottomMargin: 0
+        
+        Button {
+            id: buttonToAddCard
+            visible: true
+            text: qsTr("add to my hand")
+            anchors.fill: parent
+            font.pixelSize: 50
+            enabled: false
+        }
+    }
+    
+    Rectangle {
+        id: myDiamonds
+        height: rectangle.height / 9
+        color: "#00160ef4"
+        anchors.left: specialCards.right
+        anchors.right: score.left
+        anchors.bottom: myClubs.top
+        anchors.rightMargin: 0
+        anchors.leftMargin: 0
+        anchors.bottomMargin: 0
+        
+        TextField {
+            id: textField
+            anchors.fill: parent
+            font.pixelSize: 50
+            placeholderText: qsTr("card name")
+        }
+    }
+    
+    Rectangle {
+        id: mySpades
+        height: rectangle.height / 9
+        color: "#00160ef4"
+        anchors.left: specialCards.right
+        anchors.right: score.left
+        anchors.bottom: myDiamonds.top
+        anchors.rightMargin: 0
+        anchors.leftMargin: 0
+        anchors.bottomMargin: 0
+    }
+    
+    Rectangle {
+        id: ordinaryLine
+        height: rectangle.height / 9
+        color: "#0018ac68"
+        anchors.left: specialCards.right
+        anchors.right: score.left
+        anchors.bottom: mySpades.top
+        anchors.bottomMargin: 0
+        anchors.rightMargin: 0
+        anchors.leftMargin: 0
+        
+        Rectangle {
+            id: rectangle1
+            height: 20
+            color: "#000000"
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+            anchors.leftMargin: 0
+        }
+    }
+    
+    Rectangle {
+        id: oppSpades
+        height: rectangle.height / 9
+        color: "#00160ef4"
+        anchors.left: specialCards.right
+        anchors.right: score.left
+        anchors.bottom: ordinaryLine.top
+        anchors.rightMargin: 0
+        anchors.leftMargin: 0
+        anchors.bottomMargin: 0
+    }
+    
+    Rectangle {
+        id: oppDiamonds
+        height: rectangle.height / 9
+        color: "#00160ef4"
+        anchors.left: specialCards.right
+        anchors.right: score.left
+        anchors.bottom: oppSpades.top
+        anchors.rightMargin: 0
+        anchors.leftMargin: 0
+        anchors.bottomMargin: 0
+    }
+    
+    Rectangle {
+        id: oppClubs
+        height: rectangle.height / 9
+        color: "#00160ef4"
+        anchors.left: specialCards.right
+        anchors.right: score.left
+        anchors.bottom: oppDiamonds.top
+        anchors.rightMargin: 0
+        anchors.leftMargin: 0
+        anchors.bottomMargin: 0
+    }
+    
+    Rectangle {
+        id: oppHand
+        color: "#00160ef4"
+        anchors.left: specialCards.right
+        anchors.right: score.left
+        anchors.top: parent.top
+        anchors.bottom: oppClubs.top
+        anchors.rightMargin: 0
+        anchors.leftMargin: 0
+        anchors.bottomMargin: 0
+        anchors.topMargin: 0
+    }
+    states: [
+        State {
+            name: "clicked"
+        }
+    ]
+}
